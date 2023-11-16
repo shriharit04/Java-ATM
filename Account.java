@@ -15,7 +15,12 @@ public abstract class Account{
     void Deposit(float amt){
         bal += amt;
     }
-    
+    void AccountData(){
+        System.out.println("Account No : "+accNo);
+        System.out.println("Account Holder : "+ accHolderName);
+        System.out.println("Account Balance : "+ bal);
+        System.out.println("--------------------");
+    }
 }
 
 class SavingsAccount extends  Account {

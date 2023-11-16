@@ -1,30 +1,31 @@
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class ATM {
+public class ATM{
     ATM(float bal){
-        this.bal = bal
+        this.bal = bal;
     }
     private float bal;
-    HashMap<Integer,Float> log = new HashMap<Integer,Float>();
+    ArrayList<Transaction> log = new ArrayList<>();
     public float getBal() {
         return bal;
     }
-    public void AddMoney(float bal) {
-        this.bal += bal;
+    public void AddMoney(float b) {
+        this.bal += b;
+        log.add(new Transaction(0, 0, bal));
     }
-    public HashMap<Integer, Float> getLog() {
+    public ArrayList<Transaction> getLog() {
+        for(Transaction t : log){
+            System.out.println(t.accNo + "\t" + t.withdrawOrDeposit + "\t" + t.UpdatedBal);
+        }
         return log;
     }
 
-
-
-    <T extends Account > void StartTransaction(T acc){ //TODO:create account abstract class
-        Scanner sc = new Scanner(System.in);
+    <T extends Account > void StartTransaction(T acc){ 
+        
        //logging in 
         for(int i = 1; i<=3;i++) {
             System.out.print("Enter Pin : ");
-            int pin = sc.nextInt();
+            int pin = Main.sc.nextInt();
             if(pin!= acc.pin){
                 if(i==3){
                     System.out.println("Account has been locked. Please contact bank to unlock.");
@@ -39,38 +40,37 @@ public class ATM {
         //print services
         System.out.println("Account Balance : " + acc.bal);
         System.out.println("Available services : \n 1 : Withdraw Money\n 2 : Deposit Money");
-        int ch = sc.nextInt();
+        int ch = Main.sc.nextInt();
         float amt;
         switch (ch) {
             case 1:
                 System.out.print("Enter amount to withdraw : ");
-                amt = sc.nextFloat();
+                amt = Main.sc.nextFloat();
                 if(amt>bal){
                     System.out.println("Low balance in ATM, sorry for the inconvenience.");
+                    return;
                 }
                 bal -= amt;
                 acc.Withdraw(amt);
-
                 System.out.println("Successful");
                 break;
             case 2:
                 System.out.print("Enter amount to deposit : ");
-                amt = sc.nextFloat();
+                amt = Main.sc.nextFloat();
                 bal += amt;
                 acc.Deposit(amt);
 
                 System.out.println("Successful");
+                
                 break;
             default:
                 System.out.println("Please Enter the right option. Logging out");
-                break;
-
-            
+                break;            
         }
-        
-    
-
-        sc.close();
+                    
+        Transaction transaction = new Transaction(acc.accNo, ch, bal);
+        log.add(transaction);
+        acc.AccountData();
     }
 
 }
