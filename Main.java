@@ -1,8 +1,8 @@
-//TODO: Add object serilization to ATM
-//Create PaCKAGE bANKING SYSTEM for the same.
-//TODO: LOg the the data to a file.
+
 
 import java.util.Scanner;
+
+import BankingSystem.*;
 public class Main {
     public static Scanner sc = new Scanner(System.in);
 
@@ -18,8 +18,8 @@ public class Main {
         a1.AddMoney(100000);
         a1.getLog();
 
-        sc.close();
 
-    
+
+        sc.close();    
     }
 }

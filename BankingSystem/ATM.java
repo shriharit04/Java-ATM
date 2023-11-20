@@ -1,7 +1,10 @@
+package BankingSystem;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ATM{
-    ATM(float bal){
+    Scanner sc = new Scanner(System.in);
+    public ATM(float bal){
         this.bal = bal;
     }
     private float bal;
@@ -25,7 +28,7 @@ public class ATM{
        //logging in 
         for(int i = 1; i<=3;i++) {
             System.out.print("Enter Pin : ");
-            int pin = Main.sc.nextInt();
+            int pin = sc.nextInt();
             if(pin!= acc.pin){
                 if(i==3){
                     System.out.println("Account has been locked. Please contact bank to unlock.");
@@ -40,12 +43,12 @@ public class ATM{
         //print services
         System.out.println("Account Balance : " + acc.bal);
         System.out.println("Available services : \n 1 : Withdraw Money\n 2 : Deposit Money");
-        int ch = Main.sc.nextInt();
+        int ch = sc.nextInt();
         float amt;
         switch (ch) {
             case 1:
                 System.out.print("Enter amount to withdraw : ");
-                amt = Main.sc.nextFloat();
+                amt = sc.nextFloat();
                 if(amt>bal){
                     System.out.println("Low balance in ATM, sorry for the inconvenience.");
                     return;
@@ -56,7 +59,7 @@ public class ATM{
                 break;
             case 2:
                 System.out.print("Enter amount to deposit : ");
-                amt = Main.sc.nextFloat();
+                amt = sc.nextFloat();
                 bal += amt;
                 acc.Deposit(amt);
 

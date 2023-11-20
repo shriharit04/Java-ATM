@@ -1,3 +1,4 @@
+package BankingSystem;
 public class Transaction {
     int accNo;
     String withdrawOrDeposit;
