@@ -1,4 +1,4 @@
-package BankingSystem;
+
 public abstract class Account{
     int accNo;
     protected int bal;
